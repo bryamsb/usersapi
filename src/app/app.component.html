@@ -1,0 +1,76 @@
+<div class="container mt-4">
+  <h1>{{ title }}</h1>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5 class="card-title">Agregar Usuario</h5>
+      <form (ngSubmit)="addUser()">
+        <div class="form-group">
+          <label for="email">Correo Electrónico</label>
+          <input type="email" id="email" class="form-control" [(ngModel)]="newUser.email" name="email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="name">Nombre</label>
+          <input type="text" id="name" class="form-control" [(ngModel)]="newUser.name" name="name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input type="password" id="password" class="form-control" [(ngModel)]="newUser.password" name="password" required />
+        </div>
+
+        <div class="form-group">
+          <label for="role">Rol</label>
+          <input type="text" id="role" class="form-control" [(ngModel)]="newUser.role" name="role" required />
+        </div>
+
+        <div class="form-group">
+          <label for="avatar">Avatar URL</label>
+          <input type="text" id="avatar" class="form-control" [(ngModel)]="newUser.avatar" name="avatar" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Agregar Usuario</button>
+      </form>
+    </div>
+
+    <h3> (*)   Los roles solo puede ser admin o costumer.</h3>
+    <h3> (**)  Avatar URL necesariamente debe ser un link.</h3>
+  </div>
+
+  
+  
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Lista de Usuarios</h5>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Correo Electrónico</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Rol</th>
+            <th scope="col">Avatar</th>
+            <th scope="col">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{ user.id }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.role }}</td>
+            <td>
+              <img *ngIf="user.avatar" [src]="user.avatar" alt="Avatar" width="50" height="50" />
+            </td>
+            <td>
+             
+              <button class="btn btn-warning btn-sm" (click)="editUser(user.id)">Editar</button>
+              <button class="btn btn-danger btn-sm" (click)="deleteUser(user.id)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
